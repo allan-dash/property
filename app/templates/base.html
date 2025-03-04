@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Microblog</title>
+      {% else %}
+      <title>Welcome to Microblog</title>
+      {% endif %}
+      <script src="https://kit.fontawesome.com/1e86b33eec.js" crossorigin="anonymous"></script>
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/requests.css') }}">
+    </head>
+<div class="navbarContainer">
+    <div class="navbarContainerInner">
+        <div class="logoContainer">
+            <img class="logoImage" src="{{ url_for('static', filename='images/logo.png') }}">
+            <a href="{{ url_for('index') }}"><p class="navbarTitle">IECOM Rentals</p></a>
+        </div>
+        <div class="navbarOptionsContainer">
+            <a href=""><div class="navbarOption">Explore Properties</div></a>
+            <a href=""><div class="navbarOption">Bookings</div></a>
+            <a href=""><div class="navbarOption">Help Centre</div></a>
+            {% if current_user.is_anonymous %}
+            <a href=""><div class="navbarOption">Log In</div></a>
+            {% else %}
+            <a href=""><div class="navbarOption">Profile</div></a>
+            <div class="navbarNotification">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% block content %}{% endblock %}

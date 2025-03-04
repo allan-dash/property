@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <title>{{ title }} - Microblog</title>
+    <script src="https://kit.fontawesome.com/1e86b33eec.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/property.css') }}">
+  </head>
+<main>
+<div class="mainContainer">
+<div class="propertyImagesContainer">
+    <img class="propertyImageMain">
+    <div class="propertyImagesContainerSide">
+        <img class="propertyImage">
+        <img class="propertyImage">
+    </div>
+</div>
+<div class="propertyInfoContainer">
+    <h2 class="propertyLocation"></h2>
+    <h1 class="propertyName"></h1>
+    <div class="propertyAmenitiesContainer">
+        <div class="propertyBedrooms">
+            <i class="fa-solid fa-bed bedroomIcon"></i>
+            <p class="propertyBedroomCount">8</p>
+        </div>
+        <div class="propertyBathrooms">
+            <i class="fa-solid fa-shower bathroomIcon"></i>
+            <p class="propertyBathroomCount">8.5</p>
+        </div>
+        <div class="propertyBeds">
+
+        </div>
+        <div class="propertyCapacity">
+            <i class="fa-solid fa-user-group capacityIcon"></i>
+            <p class="propertyCapacityCount">22</p>
+        </div>
+    </div>
+</div>
+</main>
+</div>
+{% endblock %}
+

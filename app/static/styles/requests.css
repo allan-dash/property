@@ -1,0 +1,262 @@
+@font-face {
+    font-family: Figtree;
+    src: url(/static/fonts/Figtree.ttf);
+    font-display: swap;
+  }
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Figtree, sans-serif;
+}
+
+a:link { 
+    text-decoration: none; 
+  } 
+  a:visited { 
+    text-decoration: none; 
+  } 
+  a:hover { 
+    text-decoration: none; 
+  } 
+  a:active { 
+    text-decoration: none; 
+  }
+
+body{
+    font-family: SuisseReg, sans-serif;
+    overflow-x: hidden;
+    background-color: #000000;
+    color: white;
+    font-size: 20px;
+}
+
+main{
+    width: 100%;
+    margin-top: -20px;
+    height: 40vh;
+    background-position: 0px 0px 600px 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(0deg,rgba(0,0,0,.4),rgba(0,0,0,.4)),linear-gradient(180deg,rgba(0,0,0,.4) 50%,#000),url(https://assets.wander.com/440224330396205386/2440.webp);
+}
+
+@-webkit-keyframes animatedBackground {
+    100% {
+      -webkit-background-position: 0px 100%;
+    }
+  }
+
+@keyframes animatedBackground {
+    100% {
+      background-position: 0px 500%;
+    }
+  }
+
+.navbarContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.navbarContainerInner{
+    top: 10px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    opacity: 80%;
+    padding: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 50px;
+}
+
+.navbarOptionsContainer{
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 5px;
+}
+
+.navbarOption{
+    font-size: 21px;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.logoImage{
+    height: 50px;
+    width: 50px;
+}
+
+.logoContainer{
+    display: none;
+    align-items: center;
+    gap: 5px;
+    left: 0px;
+}
+
+.navbarTitle{
+    font-size: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+}
+
+.fa-bell{
+    font-size: 22px;
+}
+
+.mainContainer{
+    padding-top: 100px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 200px;
+}
+
+.introTextContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.introTitle,.introText{
+    text-align: center;
+    color: white;
+}
+
+.introTitle{
+    font-size: 50px;
+}
+
+.introText{
+    max-width: 500px;
+    font-size: 20px;
+    font-weight: 200;}
+
+.membersIconContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0px;
+    opacity: 80%;
+}
+
+.membersIconContainerInner{
+  display: flex;
+}
+
+.membersIcon{
+  height: 30px;
+  border-radius: 50%;
+  margin-left: -5px;
+}
+
+.membersIconText{
+  font-size: 17px;
+}
+
+.searchbarContainer{
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  margin-top: 25px;
+}
+
+.searchbarOption{
+  border-right: 2px solid black;
+  height: 100%;
+  padding: 20px 45px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#lastOption{
+  border-right: none;
+}
+
+.searchbarOptionIcon{
+  font-size: 25px;
+  opacity: 85%;
+}
+
+.propertiesContainer{
+  display: flex;
+  gap: 50px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.property{
+  width: 400px;
+}
+
+.propertyImage{
+  width: 100%;
+  border-radius: 10px;
+}
+
+.propertyTextContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.propertyLocation{
+  font-size: 16px;
+  opacity: 80%;
+  font-weight: 300;
+  letter-spacing: 1.5px;
+}
+
+.propertyName{
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.propertyInfoContainer{
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.propertyNextAvailable{
+  font-size: 16px;
+}
+
+.propertyBedrooms,.propertyBathrooms,.propertyCapacity{
+  font-size: 16px;
+  font-weight: 300;
+  display: flex;
+  gap: 5px;
+}
+
+.propertyBedrooms{
+  padding-left: 20px;
+  border-left: 1px solid rgb(153 153 153);
+}
+
+.bedroomIcon,.bathroomIcon,.capacityIcon{
+  color: rgb(153 153 153);
+  opacity: 80%;
+}
