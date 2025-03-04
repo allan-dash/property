@@ -5,38 +5,260 @@
     <title>{{ title }} - Microblog</title>
     <script src="https://kit.fontawesome.com/1e86b33eec.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/property.css') }}">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
   </head>
 <main>
-<div class="mainContainer">
-<div class="propertyImagesContainer">
-    <img class="propertyImageMain">
-    <div class="propertyImagesContainerSide">
-        <img class="propertyImage">
-        <img class="propertyImage">
-    </div>
-</div>
-<div class="propertyInfoContainer">
-    <h2 class="propertyLocation"></h2>
-    <h1 class="propertyName"></h1>
-    <div class="propertyAmenitiesContainer">
-        <div class="propertyBedrooms">
-            <i class="fa-solid fa-bed bedroomIcon"></i>
-            <p class="propertyBedroomCount">8</p>
+    <div class="mainContainer">
+        <div class="propertyImagesContainer">
+            <div class="propertyImageMain"></div>
+            <div class="propertyImagesContainerSide">
+                <img class="propertyImage" src="https://assets.wander.com/477507508303299421/1200.webp">
+                <img class="propertyImage" src="https://assets.wander.com/327114348570869764/1200.webp">
+                <button class="propertyImageButton">See all photos</button>
+            </div>
         </div>
-        <div class="propertyBathrooms">
-            <i class="fa-solid fa-shower bathroomIcon"></i>
-            <p class="propertyBathroomCount">8.5</p>
-        </div>
-        <div class="propertyBeds">
+        <div class="propertyInfoContainer">
+            <div class="propertyInfoMain">
+                <h2 class="propertyLocation">SURFSIDE BEACH, SOUTH CAROLINA</h2>
+                <h1 class="propertyName">Surf House</h1>
+                <div class="propertyAmenitiesContainer">
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-bed statsIcon"></i>
+                        <p class="propertyBedroomCount">8 bedrooms</p>
+                    </div>
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-shower statsIcon"></i>
+                        <p class="propertyBathroomCount">8.5 baths</p>
+                    </div>
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-bed statsIcon"></i>
+                        <p class="propertyBedroomCount">8 beds</p>
+                    </div>
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-user-group statsIcon"></i>
+                        <p class="propertyCapacityCount">22 guests</p>
+                    </div>
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-maximize statsIcon"></i>
+                        <p class="propertyCapacityCount">4,276 sqft</p>
+                    </div>
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-wifi statsIcon"></i>
+                        <p class="propertyCapacityCount">Wifi</p>
+                    </div>
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-snowflake statsIcon"></i>
+                        <p class="propertyCapacityCount">Air Conditioning</p>
+                    </div>
+                    <div class="propertyStats">
+                        <i class="fa-solid fa-person-swimming statsIcon"></i>
+                        <p class="propertyCapacityCount">Pool</p>
+                    </div>
+                </div>
+                <div class="propertyInfoSelector">
+                    <div class="propertySelector">
+                        <i class="fa-solid fa-house selectorIcon"></i>
+                        <p class="propertyCapacityCount">Overview</p>
+                    </div>
+                    <div class="propertySelector">
+                        <i class="fa-solid fa-wand-sparkles selectorIcon"></i>
+                        <p class="propertyCapacityCount">Amenities</p>
+                    </div>
+                    <div class="propertySelector">
+                        <i class="fa-solid fa-location-dot selectorIcon"></i>
+                        <p class="propertyCapacityCount">Location, transport, activities</p>
+                    </div>
+                    <div class="propertySelector" style="padding-right: 40px;">
+                        <i class="fa-regular fa-heart selectorIcon"></i>
+                        <p class="propertyCapacityCount">Reviews</p>
+                    </div>
+                    <div class="hoverLine"></div>
+                </div>
+                <div class="propertySelectedInfoContainer" id="infoOverview">
+                    <p class="propertyOverviewDescription">Spacious oceanfront home in Surfside, South Carolina, with private beach access and breathtaking views of the Atlantic Ocean from nearly every angle. Perfect for your next large gathering, the home comfortably accommodates up to 22 guests with 8 bedrooms, 3 floors and an elevator.</p>
+                    <div class="propertyOverviewDescriptionBanner">
+                        <i class="fa-solid fa-sun bannerIcon"></i>
+                        <div class="bannerTextContainer">
+                            <p style="font-weight: 700;">Summer hotspot</p>
+                            <p style="color: rgb(204 204 204)">Your perfect summer getaway starts here.</p>
+                        </div>
+                    </div>
+                    <div class="bannerBottomContainer">
+                        <div class="reviewContainer">
+                            <div class="reviewTitle">
+                            <i class="fa-solid fa-star reviewIcon"></i>   
+                            <h2 class="reviewTitle">9.3/10 average guest rating</h2>    
+                            </div>
+                            <div class="reviewContainerInner">
+                                <p class="reviewText">"Staying here was an absolute delight! The home was stunning, the surroundings were breathtaking, and every detail was designed for a seamless stay. Our kids had a blast using the game tables, swimming, and making the most of the workspace."</p>
+                                <div class="reviewUser">
+                                    <img class="reviewIcon" src="https://assets.wander.com/312629119521128462/fullres.webp">
+                                    <p class="reviewName">Oliver M. from Los Angeles, CA</p>
+                                    <div class="reviewButton">
+                                        <p>All testimonials</p>
+                                        <p>></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="locationContainer">
+                            <div class="locationTitle">
+                                <i class="fa-solid fa-location-dot locationIcon"></i> 
+                                <h2 class="locationTitle">Explore this location</h2>   
+                            </div>
+                            <div class="locationContainerInner" id="locationContainerInner">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="propertySelectedInfoContainer" id="infoAmenities" style="display:none;">
+                    <p class="propertyOverviewDescription">Hotel-grade amenities, but just for you and your guests in a private, spacious vacation home. Wander Surfside Beach includes all the features you've come to expect from us - and a few surprises unique to this location. Wander is different from any other travel experience you've had before because we combine the quality of a luxury hotel with the comfort of a private vacation home. Let's dive in and explore what's included when you reserve Wander Surfside Beach.</p>
+                    <div class="amenitiesOuterContainer">
+                        <h3 style="amenPreitle">COMMON AMENITIES</h3>
+                        <h1 style="amenTitle">Essentials for a great trip</h1>
+                        <h2 style="amenSubtitle">We've thought of every detail to create the travel experience we always wanted</h2>
+                        <div class="amenitiesContainer">
+                            <div class="amenityBox">
+                                <i class="fa-solid fa-wifi amenityIcon"></i>
+                                <p class="amenityText">Wifi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        </div>
-        <div class="propertyCapacity">
-            <i class="fa-solid fa-user-group capacityIcon"></i>
-            <p class="propertyCapacityCount">22</p>
+            <div id="scroller-anchor"></div> 
+            <div class="propertyInfoSide bookingContainer" id="scroller">
+                <h1 class="bookingTitle">Select Dates</h1>
+                <img src="https://i.gyazo.com/de0cd53749cac2e6f6337bd0dc0507b9.png" style="margin-top: 15px; height: 429px;">
+            </div>
         </div>
     </div>
-</div>
 </main>
-</div>
+<script>
+const selectors = document.querySelectorAll(".propertySelector");
+const hoverLine = document.querySelector(".hoverLine");
+const container = document.querySelector(".propertyInfoSelector");
+
+let activeElement = selectors[0]; // Default: First item selected on page load
+moveHoverLine(activeElement); // Set initial position
+
+selectors.forEach((selector) => {
+    selector.addEventListener("click", (e) => {
+        activeElement = e.target.closest(".propertySelector"); // Store clicked element
+        moveHoverLine(activeElement);
+    });
+});
+
+// Function to move the underline
+function moveHoverLine(element) {
+    const { left, width } = element.getBoundingClientRect();
+    const containerLeft = container.getBoundingClientRect().left;
+
+    hoverLine.style.width = `${width}px`;
+    hoverLine.style.transform = `translateX(${left - containerLeft}px)`;
+}
+
+  </script>
+  <script>
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsYW5kYXNoODIiLCJhIjoiY203dWl3NXlqMDEyYjJrcGtpYmlmam81cyJ9.RawT0cbxDoiAc9TKdiZutw';
+
+    const map = new mapboxgl.Map({
+    container: 'locationContainerInner', // container ID
+    center: [151.1825, -33.875],
+    zoom: 13 // Closer zoom level
+});
+
+map.on('load', function () {
+    map.addLayer({
+        id: 'circle-layer',
+        type: 'circle',
+        source: {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: [{
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [151.1825, -33.8747]
+                    }
+                }]
+            }
+        },
+        paint: {
+            'circle-radius': 25, // Circle size in pixels
+            'circle-color': '#000000', // Red color
+            'circle-opacity': 0.5 // Semi-transparent
+        }
+    });
+});
+</script>
+
+<script>
+    var startProductBarPos=-1;
+window.onscroll=function(){
+  var bar = document.getElementById('scroller');
+  if(startProductBarPos<0)startProductBarPos=findPosY(bar);
+
+  if(pageYOffset>startProductBarPos){
+    bar.style.position='fixed';
+    bar.style.top="100px";
+    bar.style.right="85px";
+    bar.style.width="460px"
+  }else{
+    bar.style.position='relative';
+    bar.style.width="100%"
+    bar.style.right=0;
+    bar.style.top=0;
+  }
+
+};
+
+function findPosY(obj) {
+  var curtop = -100;
+  if (typeof (obj.offsetParent) != 'undefined' && obj.offsetParent) {
+    while (obj.offsetParent) {
+      curtop += obj.offsetTop;
+      obj = obj.offsetParent;
+    }
+    curtop += obj.offsetTop;
+  }
+  else if (obj.y)
+    curtop += obj.y;
+  return curtop;
+}
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const selectors = document.querySelectorAll(".propertySelector");
+    const infoContainers = {
+        "Overview": document.getElementById("infoOverview"),
+        "Amenities": document.getElementById("infoAmenities"),
+        // Add more sections here if needed
+    };
+
+    selectors.forEach(selector => {
+        selector.addEventListener("click", function () {
+            const selectedText = this.querySelector(".propertyCapacityCount").textContent.trim();
+            
+            // Hide all containers
+            Object.values(infoContainers).forEach(container => {
+                container.style.display = "none";
+            });
+            
+            // Show the selected container if it exists
+            if (infoContainers[selectedText]) {
+                infoContainers[selectedText].style.display = "block";
+            }
+        });
+    });
+});
+
+</script>
 {% endblock %}
 
