@@ -59,6 +59,7 @@ main{
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
 }
 
 .introTitle,.introText{
@@ -136,6 +137,7 @@ main{
 
 .property{
   width: 400px;
+  color: white;
 }
 
 .propertyImage{

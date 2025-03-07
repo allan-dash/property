@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<main style="margin-top: 100px">
+    <h2>Admin Control Panel</h2>
+    
+    <h3>Promote Users to Administrator</h3>
+    <form method="POST">
+        <label for="user_id">Select a User:</label>
+        <select name="user_id">
+            {% for user in users %}
+                {% if user.role != 'administrator' %}
+                    <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }} ({{ user.email }})</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <button type="submit">Make Admin</button>
+    </form>
+
+    <h2 style="margin-top: 50px">Manage Amenities</h2>
+    
+    <!-- Amenity Form -->
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+        </div>
+
+        <div>
+            {{ form.icon.label }} {{ form.icon(class="form-control") }}
+        </div>
+
+        <div>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+
+    <!-- List of Amenities -->
+    <h3>Existing Amenities</h3>
+    <ul>
+        {% for amenity in amenities %}
+            <li>
+                <i class="fa-solid fa-{{ amenity.icon }}"></i> {{ amenity.name }}
+            </li>
+        {% endfor %}
+    </ul>
+</main>
+{% endblock %}

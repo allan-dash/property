@@ -1,0 +1,69 @@
+{% if form.errors %}
+    <ul>
+    {% for field, errors in form.errors.items() %}
+        {% for error in errors %}
+            <li>{{ field }}: {{ error }}</li>
+        {% endfor %}
+    {% endfor %}
+    </ul>
+{% endif %}
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <div>
+        <label for="name">Property Name:</label>
+        {{ form.name(size=40, placeholder="Property Name") }}
+    </div>
+
+    <div>
+        <label for="location">Location:</label>
+        {{ form.location(size=40, placeholder="Location") }}
+    </div>
+
+    <div>
+        <label for="description">Description:</label>
+        {{ form.description(cols=40, rows=5, placeholder="Description") }}
+    </div>
+
+    <div>
+        <label for="bedrooms">Bedrooms:</label>
+        {{ form.bedrooms(placeholder="Bedrooms") }}
+    </div>
+
+    <div>
+        <label for="bathrooms">Bathrooms:</label>
+        {{ form.bathrooms(placeholder="Bathrooms") }}
+    </div>
+
+    <div>
+        <label for="beds">Beds:</label>
+        {{ form.beds(placeholder="Beds") }}
+    </div>
+
+    <div>
+        <label for="guests">Guest Capacity:</label>
+        {{ form.guests(placeholder="Guest Capacity") }}
+    </div>
+
+    <div>
+        <label for="size">Size (sqft):</label>
+        {{ form.size(placeholder="Size in sqft") }}
+    </div>
+
+    <div>
+        <label for="price">Price per Night ($):</label>
+        {{ form.price(placeholder="Price per Night") }}
+    </div>
+
+    <div>
+        <label for="latitude">Latitude:</label>
+        {{ form.latitude(placeholder="Latitude") }}
+    </div>
+
+    <div>
+        <label for="longitude">Longitude:</label>
+        {{ form.longitude(placeholder="Longitude") }}
+    </div>
+
+    <button type="submit">Add Property</button>
+</form>

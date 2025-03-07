@@ -1,56 +1,45 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FileField, SelectField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, FileField, SelectField, IntegerField, DecimalField
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Optional
+from wtforms_sqlalchemy.fields import QuerySelectMultipleField
 import sqlalchemy as sa
 from app import db
-from app.models import User
+from app.models import User, Amenity
 import re
 
-
-USERNAME_REGEX = r'^[a-zA-Z0-9_]+$'
-
-def validate_username_format(form, field):
-    """Custom validator for username format"""
-    if not re.match(USERNAME_REGEX, field.data):
-        raise ValidationError('Username must only contain letters, numbers, and underscores, with no spaces.')
-
-class CreateGroupForm(FlaskForm):
-    name = StringField('Group Name', validators=[DataRequired(), Length(min=3, max=100)])
-    icon = FileField('Group Icon')
-    description = TextAreaField('Description', validators=[DataRequired(), Length(min=10)])
-    status = SelectField('Status', choices=[('public', 'Public'), ('private', 'Private')], validators=[DataRequired()])
-    submit = SubmitField('Create Group')
-
-class AddUserToGroupForm(FlaskForm):
-    group_id = SelectField('Group', coerce=int, validators=[DataRequired()])
-    user_id = SelectField('User', coerce=int, validators=[DataRequired()])
-    role = SelectField('Role', choices=[('USER', 'User'), ('ADMIN', 'Admin'), ('OWNER', 'Owner')], validators=[DataRequired()])
-    submit = SubmitField('Add User to Group')
-
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Sign In')
 
-    def validate_username(self, field):
-        field.data = field.data.strip()  # Removes leading & trailing spaces
 
+class AddPropertyForm(FlaskForm):
+    name = StringField('Property Name', validators=[DataRequired()])
+    location = StringField('Location', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[Optional()])
+    bedrooms = IntegerField('Bedrooms', validators=[DataRequired()])
+    bathrooms = DecimalField('Bathrooms', places=1, validators=[DataRequired()])
+    beds = IntegerField('Beds', validators=[DataRequired()])
+    guests = IntegerField('Guest Capacity', validators=[DataRequired()])
+    size = IntegerField('Size (sqft)', validators=[DataRequired()])
+    price = DecimalField('Price per Night ($)', places=2, validators=[DataRequired()])
+    latitude = StringField('Latitude', validators=[Optional()])
+    longitude = StringField('Longitude', validators=[Optional()])
+    submit = SubmitField('Add Property')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), validate_username_format, Length(min=0, max=25)])
-    display_name = StringField('Username', validators=[DataRequired(), Length(min=0, max=25)])
     email = StringField('Email', validators=[DataRequired(), Email()])
+    firstname = StringField('First Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
-    def validate_username(self, username):
-        user = db.session.scalar(sa.select(User).where(
-            User.username == username.data))
-        if user is not None:
-            raise ValidationError('Please use a different username.')
+class AddAmenityForm(FlaskForm):
+    name = StringField('Amenity Name', validators=[DataRequired()])
+    icon = StringField('Icon (FontAwesome/Material UI class)', validators=[DataRequired()])
+    submit = SubmitField('Add Amenity')
 
     def validate_email(self, email):
         user = db.session.scalar(sa.select(User).where(
@@ -58,19 +47,27 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
         
-class EditProfileForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), validate_username_format])
-    about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+        
+class AddAmenitiesToPropertyForm(FlaskForm):
+    amenities = QuerySelectMultipleField(
+        'Amenities',
+        query_factory=None,  # We'll set this dynamically in the view
+        get_label='name',
+        allow_blank=True
+    )
     submit = SubmitField('Submit')
 
-    def __init__(self, original_username, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.original_username = original_username
+    def __init__(self, *args, **kwargs):
+        property_instance = kwargs.pop('property_instance', None)
+        super(AddAmenitiesToPropertyForm, self).__init__(*args, **kwargs)
+        
+        if property_instance:
+            # Dynamically set the query_factory based on the property_instance
+            self.amenities.query_factory = lambda: Amenity.query.filter(
+                Amenity.id.notin_([a.id for a in property_instance.amenities])
+            ).all()
 
-    def validate_username(self, username):
-        if username.data != self.original_username:
-            user = db.session.scalar(sa.select(User).where(
-                User.username == username.data))
+
 
 class EmptyForm(FlaskForm):
     submit = SubmitField('Submit')

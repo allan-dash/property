@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <title>{{ title }} - Microblog</title>
+    <script src="https://kit.fontawesome.com/1e86b33eec.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/property_manage.css') }}">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.10.0/mapbox-gl.js"></script>
+  </head>
+<main>
+<div class=" managementSettingContainer changeDescription" style="margin-top: 100px;">
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="formbox">
+            <label for="name">Property Name</label>
+            <input type="text" name="name" id="name" placeholder="{{ property.name }}"></input>
+            <button type="submit" name="save_name" class="btn btn-primary mt-2">Save Name</button>
+        </div>
+    </form>
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="formbox">
+            <label for="name">Property Location</label>
+            <input type="text" name="location" id="location" placeholder="{{ property.location }}"></input>
+            <button type="submit" name="save_location" class="btn btn-primary mt-2">Save Location</button>
+        </div>
+    </form>
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="formbox">
+            <label for="name">Bedroom Count</label>
+            <input type="text" name="bedroom_count" id="bedroom_count" placeholder="{{ property.bedroom_count }}"></input>
+            <button type="submit" name="save_bedroom_count" class="btn btn-primary mt-2">Save Bedroom Count</button>
+        </div>
+    </form>
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="formbox">
+            <label for="name">Bathroom Count</label>
+            <input type="text" name="bathroom_count" id="bathroom_count" placeholder="{{ property.bathroom_count }}"></input>
+            <button type="submit" name="save_bathroom_count" class="btn btn-primary mt-2">Save bathroom_count</button>
+        </div>
+    </form>
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="formbox">
+            <label for="name">Bed Count</label>
+            <input type="text" name="bed_count" id="bed_count" placeholder="{{ property.bed_count }}"></input>
+            <button type="submit" name="save_bed_count" class="btn btn-primary mt-2">Save bed_count</button>
+        </div>
+    </form>
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="formbox">
+            <label for="name">Size Sqft</label>
+            <input type="text" name="size_sqft" id="size_sqft" placeholder="{{ property.size_sqft }}"></input>
+            <button type="submit" name="save_size_sqft" class="btn btn-primary mt-2">Save size_sqft</button>
+        </div>
+    </form>
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="latlonspecialcontainer">
+            <div class="formbox">
+                <label for="name">Property Latitude & Longitude</label>
+                <input type="text" name="longitude" id="longitude" placeholder="{{ property.longitude }}"></input>
+                <input type="text" name="latitude" id="latitude" placeholder="{{ property.latitude }}"></input>
+                <button type="submit" name="save_latitudelongitude" class="btn btn-primary mt-2">Save save_latitudelongitude</button>
+            </div>
+            <div class="latloncontain" id="latloncontain"></div>
+        </div>
+    </form>
+    <form action="{{ url_for('manage_property', property_id=property.id) }}" method="POST" style="display:inline;">
+        <div class="formbox">
+        <label for="name">Property Description</label>
+        <textarea name="description" id="description" rows="4" cols="50">{{ property.description }}</textarea>
+        <button type="submit" name="save_description" class="btn btn-primary mt-2">Save description</button>
+        </div> 
+    </form>
+</div>
+
+<script>
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1IjoiYWxsYW5kYXNoODIiLCJhIjoiY203dWl3NXlqMDEyYjJrcGtpYmlmam81cyJ9.RawT0cbxDoiAc9TKdiZutw';
+
+    const map = new mapboxgl.Map({
+    container: 'latloncontain', // container ID
+    center: [{{ property.latitude }}, {{ property.longitude }}],
+    zoom: 13 // Closer zoom level
+});
+
+map.on('load', function () {
+    map.addLayer({
+        id: 'circle-layer',
+        type: 'circle',
+        source: {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: [{
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [{{ property.latitude }}, {{ property.longitude }}]
+                    }
+                }]
+            }
+        },
+        paint: {
+            'circle-radius': 25, // Circle size in pixels
+            'circle-color': '#000000', // Red color
+            'circle-opacity': 0.5 // Semi-transparent
+        }
+    });
+});
+</script>
+
+{% endblock %}

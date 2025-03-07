@@ -20,40 +20,35 @@
         </div>
         <div class="propertyInfoContainer">
             <div class="propertyInfoMain">
-                <h2 class="propertyLocation">SURFSIDE BEACH, SOUTH CAROLINA</h2>
-                <h1 class="propertyName">Surf House</h1>
+                <div class="propertyDetailsContainer">
+                    <div class="propertyDetailsInner">
+                        <h2 class="propertyLocation">{{ property.location.upper() }}</h2>
+                        <h1 class="propertyName">{{ property.name }}</h1>
+                    </div>
+                    {% if user.role == 'administrator' %}
+                    <a href="{{ url_for('manage_property', property_id=property.id) }}"><div class="manageButton">Manage Property</div></a>
+                    {% endif %}
+                </div>
                 <div class="propertyAmenitiesContainer">
                     <div class="propertyStats">
                         <i class="fa-solid fa-bed statsIcon"></i>
-                        <p class="propertyBedroomCount">8 bedrooms</p>
+                        <p class="propertyBedroomCount">{{ property.bedroom_count }} bedrooms</p>
                     </div>
                     <div class="propertyStats">
                         <i class="fa-solid fa-shower statsIcon"></i>
-                        <p class="propertyBathroomCount">8.5 baths</p>
+                        <p class="propertyBathroomCount">{{ property.bathroom_count }} baths</p>
                     </div>
                     <div class="propertyStats">
                         <i class="fa-solid fa-bed statsIcon"></i>
-                        <p class="propertyBedroomCount">8 beds</p>
+                        <p class="propertyBedroomCount">{{ property.bed_count }} beds</p>
                     </div>
                     <div class="propertyStats">
                         <i class="fa-solid fa-user-group statsIcon"></i>
-                        <p class="propertyCapacityCount">22 guests</p>
+                        <p class="propertyCapacityCount">{{ property.guest_capacity }} guests</p>
                     </div>
                     <div class="propertyStats">
                         <i class="fa-solid fa-maximize statsIcon"></i>
-                        <p class="propertyCapacityCount">4,276 sqft</p>
-                    </div>
-                    <div class="propertyStats">
-                        <i class="fa-solid fa-wifi statsIcon"></i>
-                        <p class="propertyCapacityCount">Wifi</p>
-                    </div>
-                    <div class="propertyStats">
-                        <i class="fa-solid fa-snowflake statsIcon"></i>
-                        <p class="propertyCapacityCount">Air Conditioning</p>
-                    </div>
-                    <div class="propertyStats">
-                        <i class="fa-solid fa-person-swimming statsIcon"></i>
-                        <p class="propertyCapacityCount">Pool</p>
+                        <p class="propertyCapacityCount">{{ property.size_sqft }} sqft</p>
                     </div>
                 </div>
                 <div class="propertyInfoSelector">
@@ -76,7 +71,7 @@
                     <div class="hoverLine"></div>
                 </div>
                 <div class="propertySelectedInfoContainer" id="infoOverview">
-                    <p class="propertyOverviewDescription">Spacious oceanfront home in Surfside, South Carolina, with private beach access and breathtaking views of the Atlantic Ocean from nearly every angle. Perfect for your next large gathering, the home comfortably accommodates up to 22 guests with 8 bedrooms, 3 floors and an elevator.</p>
+                    <p class="propertyOverviewDescription">{{ property.description}}</p>
                     <div class="propertyOverviewDescriptionBanner">
                         <i class="fa-solid fa-sun bannerIcon"></i>
                         <div class="bannerTextContainer">
@@ -115,16 +110,34 @@
                 <div class="propertySelectedInfoContainer" id="infoAmenities" style="display:none;">
                     <p class="propertyOverviewDescription">Hotel-grade amenities, but just for you and your guests in a private, spacious vacation home. Wander Surfside Beach includes all the features you've come to expect from us - and a few surprises unique to this location. Wander is different from any other travel experience you've had before because we combine the quality of a luxury hotel with the comfort of a private vacation home. Let's dive in and explore what's included when you reserve Wander Surfside Beach.</p>
                     <div class="amenitiesOuterContainer">
-                        <h3 style="amenPreitle">COMMON AMENITIES</h3>
-                        <h1 style="amenTitle">Essentials for a great trip</h1>
-                        <h2 style="amenSubtitle">We've thought of every detail to create the travel experience we always wanted</h2>
+                        <p class="amenPreTitle">COMMON AMENITIES</p>
+                        <h1 class="amenTitle">Essentials for a great trip</h1>
+                        <p class="amenSubtitle">We've thought of every detail to create the travel experience we always wanted</p>
                         <div class="amenitiesContainer">
-                            <div class="amenityBox">
-                                <i class="fa-solid fa-wifi amenityIcon"></i>
-                                <p class="amenityText">Wifi</p>
-                            </div>
+                            {% for amenity in property.amenities %}
+                                <div class="amenityBox">
+                                    <i class="fa-solid fa-{{ amenity.icon }} amenityIcon"></i>
+                                    <p class="amenityText">{{ amenity.name }}</p>
+                                </div>
+                            {% else %}
+                                <a href="{{ url_for('add_amenities_to_property', property_id=property.id) }}" id="firstAmen" class="amenityBox" style="border: 1px solid rgb(116, 21, 21);">
+                                    <i class="fa-solid fa-triangle-exclamation amenityIcon" style="color: rgb(116, 21, 21);"></i>
+                                    <p class="amenityText" style="color: white;">Add first amenity now!</p>
+                                </a>  
+                            {% endfor %}
+                            {% if user.role == 'administrator' %}
+                                <a href="{{ url_for('add_amenities_to_property', property_id=property.id) }}" class="amenityBox" style="border: 1px solid rgb(54, 106, 202);">
+                                    <i class="fa-solid fa-shield amenityIcon" style="color: rgb(54, 106, 202);"></i>
+                                    <p class="amenityText" style="color: white;">Add amenities</p>
+                                </a>                           
+                            {% endif %}
                         </div>
                     </div>
+                </div>
+
+                <div class="propertySelectedInfoContainer" id="infoLocation" style="display:none;">
+                    <p class="propertyOverviewDescription">Let's make this your best trip ever. We want you to venture beyond the four walls of our homes to explore everything each destination has to offer. From amazing restaurants, to outdoor activities, to local treasures around Surfside Beach. Continue below to view our local activity guide, restaurant recommendations and more.
+                    </p>
                 </div>
             </div>
 
@@ -169,7 +182,7 @@ function moveHoverLine(element) {
 
     const map = new mapboxgl.Map({
     container: 'locationContainerInner', // container ID
-    center: [151.1825, -33.875],
+    center: [{{ property.latitude }}, {{ property.longitude }}],
     zoom: 13 // Closer zoom level
 });
 
@@ -185,7 +198,7 @@ map.on('load', function () {
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [151.1825, -33.8747]
+                        coordinates: [{{ property.latitude }}, {{ property.longitude }}]
                     }
                 }]
             }
@@ -208,8 +221,8 @@ window.onscroll=function(){
   if(pageYOffset>startProductBarPos){
     bar.style.position='fixed';
     bar.style.top="100px";
-    bar.style.right="85px";
-    bar.style.width="460px"
+    bar.style.right="76px";
+    bar.style.width="413px"
   }else{
     bar.style.position='relative';
     bar.style.width="100%"
@@ -239,6 +252,7 @@ function findPosY(obj) {
     const infoContainers = {
         "Overview": document.getElementById("infoOverview"),
         "Amenities": document.getElementById("infoAmenities"),
+        "Location, transport, activities": document.getElementById("infoLocation"),
         // Add more sections here if needed
     };
 

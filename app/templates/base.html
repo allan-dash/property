@@ -16,11 +16,11 @@
             <a href="{{ url_for('index') }}"><p class="navbarTitle">IECOM Rentals</p></a>
         </div>
         <div class="navbarOptionsContainer">
-            <a href=""><div class="navbarOption">Explore Properties</div></a>
+            <a href="{{ url_for('index')}}"><div class="navbarOption">Explore Properties</div></a>
             <a href=""><div class="navbarOption">Bookings</div></a>
             <a href=""><div class="navbarOption">Help Centre</div></a>
             {% if current_user.is_anonymous %}
-            <a href=""><div class="navbarOption">Log In</div></a>
+            <a href="{{ url_for('login')}}"><div class="navbarOption">Log In</div></a>
             {% else %}
             <a href=""><div class="navbarOption">Profile</div></a>
             <div class="navbarNotification">

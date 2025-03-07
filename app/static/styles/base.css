@@ -58,7 +58,8 @@ body{
     padding-bottom: 15px;
     border-radius: 50px;
     z-index: 50;
-    transition: 0.1s ease-in-out
+    transition: 0.1s ease-in-out;
+    border: 1px solid rgb(64 64 64)
 }
 
 .navbarContainerInner:hover{

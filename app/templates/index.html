@@ -9,7 +9,11 @@
 <main>
     <div class="mainContainer">
         <div class="introTextContainer">
+            {% if current_user.is_anonymous %}
             <h1 class="introTitle">Find your happy place.</h1>
+            {% else %}
+            <h1 class="introTitle">Find {{ user.firstname }}'s happy place.</h1>
+            {% endif %}
             <p class="introText">Book a vacation home with inspiring views, hotel-grade amenities, dreamy beds, top-tier cleaning and 24/7 concierge service. It's a vacation home, but better.</p>
             <div class="membersIconContainer">
                 <div class="membersIconContainerInner">
@@ -55,119 +59,30 @@
             </div>
         </div>
         <div class="propertiesContainer">
-            <div class="property">
+            {% for property in properties %}
+            <a href="{{ url_for('property_detail', property_id=property.id) }}"><div class="property">
                 <img class="propertyImage" src="https://assets.wander.com/328556002641182724/2440.webp">
                 <div class="propertyTextContainer">
-                    <h2 class="propertyLocation">SURFSIDE BEACH, SOUTH CAROLINA</h2>
-                    <h1 class="propertyName">Surf House</h1>
+                    <h2 class="propertyLocation">{{property.location}}</h2>
+                    <h1 class="propertyName">{{property.name}}</h1>
                     <div class="propertyInfoContainer">
                         <p class="propertyNextAvailable"><span style="opacity: 80%;">Next available</span> Mar 6 to Mar 9</p>
                         <div class="propertyBedrooms propertyStat">
                             <i class="fa-solid fa-bed bedroomIcon"></i>
-                            <p class="propertyBedroomCount">8</p>
+                            <p class="propertyBedroomCount">{{property.bedroom_count}}</p>
                         </div>
                         <div class="propertyBathrooms propertyStat">
                             <i class="fa-solid fa-shower bathroomIcon"></i>
-                            <p class="propertyBathroomCount">8.5</p>
+                            <p class="propertyBathroomCount">{{property.bathroom_count}}</p>
                         </div>
                         <div class="propertyCapacity propertyStat">
                             <i class="fa-solid fa-user-group capacityIcon"></i>
-                            <p class="propertyCapacityCount">22</p>
+                            <p class="propertyCapacityCount">{{property.guest_capacity}}</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="property">
-                <img class="propertyImage" src="https://assets.wander.com/448518006310436951/2440.webp">
-                <div class="propertyTextContainer">
-                    <h2 class="propertyLocation">SANTA ROSA, CALIFORNIA</h2>
-                    <h1 class="propertyName">Mountain Mansion</h1>
-                    <div class="propertyInfoContainer">
-                        <p class="propertyNextAvailable"><span style="opacity: 80%;">Next available</span> Jun 12 to Jun 27</p>
-                        <div class="propertyBedrooms propertyStat">
-                            <i class="fa-solid fa-bed bedroomIcon"></i>
-                            <p class="propertyBedroomCount">3</p>
-                        </div>
-                        <div class="propertyBathrooms propertyStat">
-                            <i class="fa-solid fa-shower bathroomIcon"></i>
-                            <p class="propertyBathroomCount">3.5</p>
-                        </div>
-                        <div class="propertyCapacity propertyStat">
-                            <i class="fa-solid fa-user-group capacityIcon"></i>
-                            <p class="propertyCapacityCount">8</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="property">
-                <img class="propertyImage" src="https://assets.wander.com/448518006310436951/2440.webp">
-                <div class="propertyTextContainer">
-                    <h2 class="propertyLocation">SANTA ROSA, CALIFORNIA</h2>
-                    <h1 class="propertyName">Mountain Mansion</h1>
-                    <div class="propertyInfoContainer">
-                        <p class="propertyNextAvailable"><span style="opacity: 80%;">Next available</span> Jun 12 to Jun 27</p>
-                        <div class="propertyBedrooms propertyStat">
-                            <i class="fa-solid fa-bed bedroomIcon"></i>
-                            <p class="propertyBedroomCount">3</p>
-                        </div>
-                        <div class="propertyBathrooms propertyStat">
-                            <i class="fa-solid fa-shower bathroomIcon"></i>
-                            <p class="propertyBathroomCount">3.5</p>
-                        </div>
-                        <div class="propertyCapacity propertyStat">
-                            <i class="fa-solid fa-user-group capacityIcon"></i>
-                            <p class="propertyCapacityCount">8</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="property">
-                <img class="propertyImage" src="https://assets.wander.com/448518006310436951/2440.webp">
-                <div class="propertyTextContainer">
-                    <h2 class="propertyLocation">SANTA ROSA, CALIFORNIA</h2>
-                    <h1 class="propertyName">Mountain Mansion</h1>
-                    <div class="propertyInfoContainer">
-                        <p class="propertyNextAvailable"><span style="opacity: 80%;">Next available</span> Jun 12 to Jun 27</p>
-                        <div class="propertyBedrooms propertyStat">
-                            <i class="fa-solid fa-bed bedroomIcon"></i>
-                            <p class="propertyBedroomCount">3</p>
-                        </div>
-                        <div class="propertyBathrooms propertyStat">
-                            <i class="fa-solid fa-shower bathroomIcon"></i>
-                            <p class="propertyBathroomCount">3.5</p>
-                        </div>
-                        <div class="propertyCapacity propertyStat">
-                            <i class="fa-solid fa-user-group capacityIcon"></i>
-                            <p class="propertyCapacityCount">8</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="property">
-                <img class="propertyImage" src="https://assets.wander.com/448518006310436951/2440.webp">
-                <div class="propertyTextContainer">
-                    <h2 class="propertyLocation">SANTA ROSA, CALIFORNIA</h2>
-                    <h1 class="propertyName">Mountain Mansion</h1>
-                    <div class="propertyInfoContainer">
-                        <p class="propertyNextAvailable"><span style="opacity: 80%;">Next available</span> Jun 12 to Jun 27</p>
-                        <div class="propertyBedrooms propertyStat">
-                            <i class="fa-solid fa-bed bedroomIcon"></i>
-                            <p class="propertyBedroomCount">3</p>
-                        </div>
-                        <div class="propertyBathrooms propertyStat">
-                            <i class="fa-solid fa-shower bathroomIcon"></i>
-                            <p class="propertyBathroomCount">3.5</p>
-                        </div>
-                        <div class="propertyCapacity propertyStat">
-                            <i class="fa-solid fa-user-group capacityIcon"></i>
-                            <p class="propertyCapacityCount">8</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            </div></a>
+            {% endfor %}
         </div>
     </div>
 </main>

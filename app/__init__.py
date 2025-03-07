@@ -7,7 +7,6 @@ import logging
 from logging.handlers import RotatingFileHandler, SMTPHandler
 import os
 from flask_mail import Mail
-from flask_socketio import SocketIO, emit
 from flask import request
 
 
@@ -15,7 +14,6 @@ from flask import request
 app = Flask(__name__)
 app.config.from_object(Config)
 db = SQLAlchemy(app)
-socketio = SocketIO(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
@@ -55,57 +53,6 @@ if not app.debug:
 
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
-
-
-@socketio.on('connect')
-def handle_connect():
-    if current_user.is_authenticated:
-        current_user.socket_id = request.sid  # Assign session ID to the user
-        db.session.commit()
-        app.logger.debug(f"User {current_user.username} connected with socket ID {request.sid}")
-    else:
-        app.logger.debug("Anonymous user connected")
-
-
-
-@socketio.on('disconnect')
-def handle_disconnect():
-    if current_user.is_authenticated:
-        current_user.socket_id = None  # Clean up when the user disconnects
-        db.session.commit()
-        app.logger.debug(f"User {current_user.id} disconnected, socket ID removed.")
-
-
-@socketio.on('send_message')
-def handle_send_message(data):
-    from app.models import User, Message
-    sender_id = current_user.id
-    recipient_id = data['recipient_id']
-    content = data['content']
-
-    # Ensure that the recipient exists
-    recipient = User.query.get(recipient_id)
-    if recipient:
-        # Save the message to the database
-        message = Message(sender_id=sender_id, recipient_id=recipient_id, content=content)
-        db.session.add(message)
-        db.session.commit()
-
-        # Emit the message to the recipient
-        emit('new_message', {
-            'sender': current_user.username,
-            'content': content,
-            'recipient_id': recipient_id
-        }, room=recipient.socket_id)
-
-        # Emit the message to the sender without relying on the broadcast
-        emit('new_message', {
-            'sender': current_user.username,
-            'content': content,
-            'recipient_id': recipient_id
-        }, room=request.sid)  # Send only to the sender
-    else:
-        app.logger.error(f"Recipient {recipient_id} not found")
 
 
 from app import routes, models, errors

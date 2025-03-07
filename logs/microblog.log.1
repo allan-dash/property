@@ -1,4 +1,13 @@
-2025-01-29 20:16:10,975 ERROR: Exception on /group/1 [GET] [in c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py:838]
+2025-03-05 17:21:13,611 ERROR: Exception on /register [POST] [in c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: user
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -8,87 +17,91 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\routes.py", line 303, in group_detail
-    return render_template(
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\templating.py", line 150, in render_template
-    return _render(app, template, context)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\templating.py", line 131, in _render
-    rv = template.render(context)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\environment.py", line 1295, in render
-    self.environment.handle_exception()
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\group.html", line 1, in top-level template code
-    {% extends ',newbase.html' %}
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\,newbase.html", line 63, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\group.html", line 24, in block 'content'
-    <p class="profileJoinDate">Created {{group.creation_date.strftime('%B %d, %Y')}}</p>
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\utils.py", line 92, in from_obj
-    if hasattr(obj, "jinja_pass_arg"):
-jinja2.exceptions.UndefinedError: 'None' has no attribute 'strftime'
-2025-01-29 20:16:20,708 ERROR: Exception on /group/1 [GET] [in c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py:838]
-Traceback (most recent call last):
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
-    response = self.full_dispatch_request()
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\routes.py", line 303, in group_detail
-    return render_template(
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\templating.py", line 150, in render_template
-    return _render(app, template, context)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\templating.py", line 131, in _render
-    rv = template.render(context)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\environment.py", line 1295, in render
-    self.environment.handle_exception()
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\group.html", line 1, in top-level template code
-    {% extends ',newbase.html' %}
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\,newbase.html", line 63, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\group.html", line 24, in block 'content'
-    <p class="profileJoinDate">Created {{group.creation_date.strftime('%B %d, %Y')}}</p>
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\utils.py", line 92, in from_obj
-    if hasattr(obj, "jinja_pass_arg"):
-jinja2.exceptions.UndefinedError: 'None' has no attribute 'strftime'
-2025-01-29 20:16:24,960 ERROR: Exception on /group/1 [GET] [in c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py:838]
-Traceback (most recent call last):
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
-    response = self.full_dispatch_request()
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\routes.py", line 303, in group_detail
-    return render_template(
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\templating.py", line 150, in render_template
-    return _render(app, template, context)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask\templating.py", line 131, in _render
-    rv = template.render(context)
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\environment.py", line 1295, in render
-    self.environment.handle_exception()
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\group.html", line 1, in top-level template code
-    {% extends ',newbase.html' %}
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\,newbase.html", line 63, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\Users\coolb\Desktop\coding\roleplay hub\app\templates\group.html", line 24, in block 'content'
-    <p class="profileJoinDate">Created {{group.creation_date.strftime('%B %d, %Y')}}</p>
-  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\jinja2\utils.py", line 92, in from_obj
-    if hasattr(obj, "jinja_pass_arg"):
-jinja2.exceptions.UndefinedError: 'None' has no attribute 'strftime'
-2025-01-29 20:16:58,106 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\roleplay hub\app\__init__.py:56]
+  File "C:\Users\coolb\Desktop\coding\property\property\app\routes.py", line 51, in register
+    if form.validate_on_submit():
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\flask_wtf\form.py", line 86, in validate_on_submit
+    return self.is_submitted() and self.validate(extra_validators=extra_validators)
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\wtforms\form.py", line 329, in validate
+    return super().validate(extra)
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\wtforms\form.py", line 146, in validate
+    if not field.validate(self, extra):
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\wtforms\fields\core.py", line 246, in validate
+    stop_validation = self._run_validation_chain(form, chain)
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\wtforms\fields\core.py", line 266, in _run_validation_chain
+    validator(form, self)
+  File "C:\Users\coolb\Desktop\coding\property\property\app\forms.py", line 25, in validate_email
+    user = db.session.scalar(sa.select(User).where(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\orm\scoping.py", line 1841, in scalar
+    return self._proxied.scalar(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2413, in scalar
+    return self._execute_internal(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1416, in execute
+    return meth(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
+    return self._exec_single_context(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2352, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "c:\users\coolb\desktop\coding\flasktest\venv\lib\site-packages\sqlalchemy\engine\default.py", line 942, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
+[SQL: SELECT user.id, user.email, user.firstname, user.lastname, user.password_hash 
+FROM user 
+WHERE user.email = ?]
+[parameters: ('allandash82@gmail.com',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-03-05 17:21:25,617 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 17:22:13,295 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 17:22:32,885 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:01:20,401 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:01:40,956 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:02:09,004 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:02:23,636 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:02:31,848 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:02:38,952 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:02:42,727 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:10:47,525 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:11:40,449 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:12:09,067 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:12:16,026 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:12:25,090 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:12:40,954 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:13:05,504 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:13:12,047 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:15:02,311 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:15:11,998 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:16:00,895 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:16:48,241 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:17:23,957 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:17:45,119 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:17:53,731 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:18:29,986 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:18:35,149 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:19:42,099 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:19:47,103 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:20:35,725 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:20:45,880 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:21:01,157 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:21:33,376 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:22:06,323 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:22:47,127 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:22:57,205 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:25:56,911 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:26:02,436 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-05 20:27:33,419 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-06 01:40:18,501 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-06 01:40:22,202 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-06 01:41:22,594 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-06 01:41:25,240 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]
+2025-03-06 02:08:17,804 INFO: Microblog startup [in C:\Users\coolb\Desktop\coding\property\property\app\__init__.py:55]

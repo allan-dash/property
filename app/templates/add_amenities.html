@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Add Amenities to {{ property_instance.name }}</h2>
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div>
+            {{ form.amenities.label }}
+            {{ form.amenities(class="form-control") }}
+        </div>
+
+        <div>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+
+    <hr>
+
+    <h3>Current Amenities:</h3>
+    <ul>
+        {% for amenity in property_instance.amenities %}
+            <li><i class="fa-solid fa-{{ amenity.icon }}"></i> {{ amenity.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
